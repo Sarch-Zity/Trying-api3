@@ -9,4 +9,4 @@ COPY . .
 
 ENV SERVER_PORT=8080
 
-CMD ["sh", "-c", "exec python3 /app/application/manage.py runserver 0.0.0.0:8080"]
+CMD ["sh", "-c", "cd application && python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8080"]
