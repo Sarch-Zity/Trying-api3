@@ -21,5 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/ping/', include("ping.urls")),
     path('api/countries/', include("countries.urls")),
-    path('api/', include("users.urls"))
+    path('api/friends/', include("friends.urls")),
+    path('api/posts/', include("posts.urls")),
+    path('api/', include("users.urls")),
 ]

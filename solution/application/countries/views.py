@@ -11,7 +11,7 @@ def countries(request):
     if regions:
         countries = countries.filter(region__in = regions)
     if not countries:
-        return Response(None, 400)
+        return Response({"error": "Нет такой страны"}, 400)
     answer = CountriesSerializer(countries, many=True)
     return Response(answer.data)
 
@@ -20,7 +20,7 @@ def countriesalpha(request, alpha2:str):
     try:
         country = Countries.objects.get(alpha2 = alpha2.upper())
     except:
-        return Response(None, 400)
+        return Response({"error": "Нет такой страны"}, 400)
     answer = CountriesSerializer(country, many=False)
 
     return Response(answer.data)

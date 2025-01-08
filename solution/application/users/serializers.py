@@ -10,3 +10,8 @@ class UpdateCustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ["countryCode", "isPublic", "phone", "image"]
+    
+class UpdatePasswordCustomUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ["password"]

@@ -30,3 +30,10 @@ class CustomUser(AbstractBaseUser):
 
     def __str__(self):
         return self.login
+
+class BlacklistedAccessToken(models.Model):
+    jti = models.CharField(max_length=255, unique=True)
+
+class AccessTokenList(models.Model):
+    jti = models.CharField(max_length=255, unique=True)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, unique=True)
