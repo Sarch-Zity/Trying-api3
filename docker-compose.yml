@@ -1,0 +1,28 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:17.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "proddb"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "password"
+    volumes:
+      - ./script/:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d proddb -U admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+
+  backend:
+    container_name: backend
+    build:
+      context: ./solution
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
