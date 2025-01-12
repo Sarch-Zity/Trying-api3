@@ -16,6 +16,8 @@ services:
       retries: 5
     ports:
       - "5432:5432"
+    networks:
+      - postgresql_bd_net
 
   backend:
     container_name: backend
@@ -26,3 +28,9 @@ services:
         condition: service_healthy
     ports:
       - "8080:8080"
+    networks:
+      - postgresql_bd_net
+
+networks:
+  postgresql_bd_net:
+    driver: bridge
